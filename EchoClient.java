@@ -1,21 +1,30 @@
-package echo;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package echoclient;
 
-import java.io.IOException;
+/**
+ *
+ * @author USRDES
+ */
+
 import java.io.*;
 import java.net.*;
-
+ 
 public class EchoClient {
-    public static void main() throws IOException {
-        
-        /*if (args.length != 2) {
+    public static void main(String[] args) throws IOException {
+         
+       /* if (args.length != 2) {
             System.err.println(
                 "Usage: java EchoClient <host name> <port number>");
             System.exit(1);
         }*/
-
+ 
         String hostName = "172.31.103.195";
-        int portNumber = 8080;
-
+        int portNumber = 8000;
+ 
         try (
             Socket echoSocket = new Socket(hostName, portNumber);
             PrintWriter out =

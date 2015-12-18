@@ -1,34 +1,49 @@
-package echo;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package echoserver;
 
-import java.io.IOException;
+/**
+ *
+ * @author USRDES
+ */
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+ 
 public class EchoServer {
-    public static void main() throws IOException {
+    public static void main(String[] args) throws IOException {   
         
+        int portNumber = 8000;
+        int i,j=1;
         
-        /*if (args.length != 1) {
-            System.err.println("Usage: java EchoServer <port number>");
-            System.exit(1);
-        }*/
-        
-        int portNumber = 8080;
-        
-        try         
+        try        
         {
-            ServerSocket serverSocket = new ServerSocket();
-            Socket clientSocket = serverSocket.accept();
-            Thread t1 = new Thread(new MiThread(clientSocket));
-            t1.start();
+            ServerSocket serverSocket = new ServerSocket(8000);
+            ArrayList<Socket> clientS=new ArrayList();
+            ArrayList<Thread> threads=new ArrayList();
             
-            try {
+            for(i=0;i<j;i++){
+                Socket clientSocket = serverSocket.accept();
+                clientS.add(clientSocket);
+            
+                Thread t1 = new Thread(new MiThread(clientSocket));
+                threads.add(t1);
+                t1.start();
+                j++;
+                
+                //Enrutamiento
+                System.out.println(t1.toString());
+            }
+            /*try {
                 t1.join();
             } catch (InterruptedException ex) {
                 Logger.getLogger(EchoServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
 
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
